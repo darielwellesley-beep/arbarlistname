@@ -27,15 +27,31 @@ body{
   text-align:center;
 }
 
-/* ===== LIGHT SUN EFFECT ===== */
+/* ===== MOVING SUNLIGHT BG ===== */
 #sunlight{
   position:fixed;
-  inset:-20%;
+  inset:-30%;
   background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 55%),
-    radial-gradient(circle at 70% 10%, rgba(255,255,255,.18), transparent 60%);
-  filter:blur(60px);
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.35), transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.25), transparent 60%);
+  filter:blur(70px);
+  animation:sunMove 18s ease-in-out infinite alternate;
   z-index:-5;
+}
+
+@keyframes sunMove{
+  0%{
+    transform:translate(-4%,-2%);
+    opacity:.6;
+  }
+  50%{
+    transform:translate(2%,3%);
+    opacity:.9;
+  }
+  100%{
+    transform:translate(5%,-4%);
+    opacity:.7;
+  }
 }
 
 /* ===== VIGNETTE ===== */
@@ -61,7 +77,7 @@ main{
   letter-spacing:12px;
   font-weight:900;
   text-shadow:
-    0 0 20px rgba(255,255,255,.4),
+    0 0 20px rgba(255,255,255,.45),
     0 0 60px rgba(255,255,255,.25);
 }
 
@@ -72,28 +88,44 @@ main{
   opacity:.85;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTONS (LIKE IMAGE) ===== */
 .buttons{
-  margin-top:50px;
+  margin-top:55px;
   display:flex;
   justify-content:center;
-  gap:40px;
+  gap:32px;
 }
-.buttons a{
-  padding:20px 70px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.35);
+
+.btn{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:18px 48px;
+  border-radius:12px;
   text-decoration:none;
   color:#fff;
-  font-size:14px;
-  letter-spacing:4px;
-  background:linear-gradient(180deg,#ffffff22,#00000088);
-  backdrop-filter:blur(10px);
-  transition:.35s;
+  font-size:15px;
+  letter-spacing:3px;
+  border:1px solid rgba(255,255,255,.35);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.15),rgba(0,0,0,.85));
+  box-shadow:
+    inset 0 0 20px rgba(255,255,255,.18),
+    0 0 25px rgba(255,255,255,.08);
+  backdrop-filter:blur(12px);
+  transition:.35s ease;
 }
-.buttons a:hover{
+
+.btn span.icon{
+  font-size:18px;
+  opacity:.9;
+}
+
+.btn:hover{
   background:#fff;
   color:#000;
+  box-shadow:
+    0 0 25px rgba(255,255,255,.6);
 }
 
 /* ===== FOOTER ===== */
@@ -118,8 +150,15 @@ footer{
   <div class="tagline">NEVERLOSE</div>
 
   <div class="buttons">
-    <a href="#">ARBAR</a>
-    <a href="#">CONTACT</a>
+    <a class="btn" href="https://gang.fivemlist.info/arbarstyle" target="_blank">
+      <span class="icon">👥</span>
+      <span>ARBAR</span>
+    </a>
+
+    <a class="btn" href="https://www.facebook.com/uno.kodomo" target="_blank">
+      <span class="icon">f</span>
+      <span>CONTACT</span>
+    </a>
   </div>
 </main>
 
