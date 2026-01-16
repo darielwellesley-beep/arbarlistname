@@ -6,14 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ===== FONT : PROBERT BOLD ===== */
-@font-face{
-  font-family:"PROBERT";
-  src:url("https://dl.dafont.com/dl/?f=probert") format("truetype");
-  font-weight:700;
-  font-style:normal;
-}
-
 /* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
@@ -22,34 +14,36 @@ html,body{height:100%}
 body{
   background:#000;
   color:#fff;
-  font-family:"PROBERT", Arial, Helvetica, sans-serif;
+  font-family:Arial Black, Impact, sans-serif;
   overflow:hidden;
   text-align:center;
 }
 
-/* ===== MOVING SUNLIGHT BG ===== */
-#sunlight{
+/* ===== WATER GLASS BG ===== */
+#water{
   position:fixed;
-  inset:-30%;
+  inset:-20%;
   background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,.35), transparent 55%),
-    radial-gradient(circle at 80% 20%, rgba(255,255,255,.25), transparent 60%);
-  filter:blur(70px);
-  animation:sunMove 18s ease-in-out infinite alternate;
-  z-index:-5;
-}
-@keyframes sunMove{
-  0%{transform:translate(-4%,-2%);opacity:.6}
-  50%{transform:translate(2%,3%);opacity:.9}
-  100%{transform:translate(5%,-4%);opacity:.7}
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.12), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,.1), transparent 45%),
+    linear-gradient(115deg,rgba(255,255,255,.08),transparent 60%);
+  filter:blur(20px);
+  animation:waterMove 12s linear infinite;
+  z-index:-3;
 }
 
-/* ===== VIGNETTE ===== */
-#vignette{
+@keyframes waterMove{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-3%,2%)}
+  100%{transform:translate(0,0)}
+}
+
+/* ===== RAIN DROPS ===== */
+canvas{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle,#0000 40%,#000 85%);
-  z-index:-4;
+  pointer-events:none;
+  z-index:-2;
 }
 
 /* ===== MAIN ===== */
@@ -61,86 +55,73 @@ main{
   width:100%;
 }
 
-/* ===== WAVE LOGO ===== */
+/* ===== TITLE ===== */
 .logo{
   font-size:96px;
-  letter-spacing:12px;
+  letter-spacing:10px;
   font-weight:900;
-  background:linear-gradient(120deg,#fff,#bbb,#fff);
-  background-size:300% 300%;
-  animation:wave 6s ease-in-out infinite;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:
-    0 0 25px rgba(255,255,255,.45),
-    0 0 60px rgba(255,255,255,.25);
-}
-@keyframes wave{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  animation:logoWave 4s ease-in-out infinite;
+  text-shadow:0 0 25px rgba(255,255,255,.5);
 }
 
-/* ===== TAGLINE ===== */
+@keyframes logoWave{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+
 .tagline{
-  margin-top:18px;
-  font-size:20px;
+  margin-top:14px;
+  font-size:32px;
   letter-spacing:6px;
-  opacity:.9;
 }
 
 /* ===== BUTTONS ===== */
 .buttons{
-  margin-top:55px;
+  margin-top:60px;
   display:flex;
   justify-content:center;
-  gap:32px;
+  gap:30px;
 }
 
 .btn{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:18px 48px;
-  border-radius:12px;
+  padding:18px 52px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.5);
+  background:rgba(0,0,0,.45);
+  color:#fff;
   text-decoration:none;
-  color:#fff;
-  font-size:15px;
-  letter-spacing:3px;
-  border:1px solid rgba(255,255,255,.35);
-  background:linear-gradient(180deg,rgba(255,255,255,.15),rgba(0,0,0,.85));
-  box-shadow:inset 0 0 20px rgba(255,255,255,.18),0 0 25px rgba(255,255,255,.08);
-  backdrop-filter:blur(12px);
-  transition:.35s ease;
-}
-.btn:hover{background:#fff;color:#000}
-
-/* ===== MUSIC BUTTON ===== */
-.music-btn{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  padding:14px 32px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.35);
-  background:linear-gradient(180deg,#ffffff22,#000000aa);
-  color:#fff;
-  letter-spacing:3px;
-  font-family:"PROBERT";
-  cursor:pointer;
+  font-size:18px;
+  letter-spacing:4px;
   backdrop-filter:blur(10px);
   transition:.3s;
 }
-.music-btn:hover{background:#fff;color:#000}
+.btn:hover{
+  background:#fff;
+  color:#000;
+}
+
+/* ===== MUSIC BTN ===== */
+.music{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:12px 28px;
+  border-radius:999px;
+  border:1px solid #fff;
+  background:rgba(0,0,0,.5);
+  color:#fff;
+  cursor:pointer;
+  letter-spacing:3px;
+}
 
 /* ===== FOOTER ===== */
 footer{
   position:fixed;
-  bottom:12px;
+  bottom:8px;
   width:100%;
   font-size:10px;
-  letter-spacing:2px;
-  opacity:.45;
+  opacity:.4;
 }
 </style>
 </head>
@@ -149,43 +130,68 @@ footer{
 
 <!-- ===== YOUTUBE MUSIC ===== -->
 <iframe id="yt"
-src="https://www.youtube.com/embed/mgK0-P8sTCw?start=11&enablejsapi=1&autoplay=1&mute=1&controls=0&loop=1&playlist=mgK0-P8sTCw"
+src="https://www.youtube.com/embed/mgK0-P8sTCw?start=11&autoplay=1&mute=1&controls=0&loop=1&playlist=mgK0-P8sTCw"
 allow="autoplay"
 style="display:none"></iframe>
 
-<div id="sunlight"></div>
-<div id="vignette"></div>
+<div id="water"></div>
+<canvas id="rain"></canvas>
 
 <main>
   <div class="logo">ARBARSTYLE</div>
   <div class="tagline">NEVERLOSE</div>
 
   <div class="buttons">
-    <a class="btn" href="https://gang.fivemlist.info/arbarstyle" target="_blank">👥 ARBAR</a>
-    <a class="btn" href="https://www.facebook.com/uno.kodomo" target="_blank">f CONTACT</a>
+    <a class="btn" href="https://gang.fivemlist.info/arbarstyle" target="_blank">ARBAR</a>
+    <a class="btn" href="https://www.facebook.com/uno.kodomo" target="_blank">CONTACT</a>
   </div>
 </main>
 
-<div class="music-btn" id="musicBtn">▶ MUSIC</div>
+<div class="music" id="musicBtn">MUSIC</div>
 
 <footer>
 © 2025 ARBAR — Designed by UNO ARBAR | LIASTNAME BY KINGS
 </footer>
 
 <script>
+/* ===== WATER DROPS ===== */
+const c=document.getElementById("rain"),x=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();onresize=resize;
+
+let drops=[...Array(120)].map(()=>({
+  x:Math.random()*c.width,
+  y:Math.random()*c.height,
+  s:Math.random()*2+1
+}));
+
+setInterval(()=>{
+  x.clearRect(0,0,c.width,c.height);
+  x.fillStyle="rgba(255,255,255,.35)";
+  drops.forEach(d=>{
+    x.fillRect(d.x,d.y,1,d.s*6);
+    d.y+=d.s;
+    if(d.y>c.height){d.y=0;d.x=Math.random()*c.width}
+  });
+},30);
+
+/* ===== MUSIC CONTROL ===== */
 const yt=document.getElementById("yt");
 const btn=document.getElementById("musicBtn");
-let playing=false;
+let unmuted=false;
+
+document.body.addEventListener("click",()=>{
+  if(!unmuted){
+    yt.src=yt.src.replace("mute=1","mute=0");
+    unmuted=true;
+  }
+},{once:true});
 
 btn.onclick=()=>{
-  if(!playing){
-    yt.src = yt.src.replace("mute=1","mute=0");
-    btn.textContent="⏸ MUSIC";
-    playing=true;
+  if(yt.src.includes("mute=0")){
+    yt.src=yt.src.replace("mute=0","mute=1");
   }else{
-    yt.src = yt.src.replace("mute=0","mute=1");
-    btn.textContent="▶ MUSIC";
-    playing=false;
+    yt.src=yt.src.replace("mute=1","mute=0");
   }
 };
 </script>
