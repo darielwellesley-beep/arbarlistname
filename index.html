@@ -38,20 +38,10 @@ body{
   animation:sunMove 18s ease-in-out infinite alternate;
   z-index:-5;
 }
-
 @keyframes sunMove{
-  0%{
-    transform:translate(-4%,-2%);
-    opacity:.6;
-  }
-  50%{
-    transform:translate(2%,3%);
-    opacity:.9;
-  }
-  100%{
-    transform:translate(5%,-4%);
-    opacity:.7;
-  }
+  0%{transform:translate(-4%,-2%);opacity:.6}
+  50%{transform:translate(2%,3%);opacity:.9}
+  100%{transform:translate(5%,-4%);opacity:.7}
 }
 
 /* ===== VIGNETTE ===== */
@@ -71,24 +61,35 @@ main{
   width:100%;
 }
 
-/* ===== LOGO ===== */
+/* ===== WAVE LOGO ===== */
 .logo{
   font-size:96px;
   letter-spacing:12px;
   font-weight:900;
+  background:linear-gradient(120deg,#fff,#bbb,#fff);
+  background-size:300% 300%;
+  animation:wave 6s ease-in-out infinite;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
   text-shadow:
-    0 0 20px rgba(255,255,255,.45),
+    0 0 25px rgba(255,255,255,.45),
     0 0 60px rgba(255,255,255,.25);
 }
-
-.tagline{
-  margin-top:18px;
-  font-size:18px;
-  letter-spacing:6px;
-  opacity:.85;
+@keyframes wave{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-/* ===== BUTTONS (LIKE IMAGE) ===== */
+/* ===== TAGLINE ===== */
+.tagline{
+  margin-top:18px;
+  font-size:20px;
+  letter-spacing:6px;
+  opacity:.9;
+}
+
+/* ===== BUTTONS ===== */
 .buttons{
   margin-top:55px;
   display:flex;
@@ -107,26 +108,30 @@ main{
   font-size:15px;
   letter-spacing:3px;
   border:1px solid rgba(255,255,255,.35);
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.15),rgba(0,0,0,.85));
-  box-shadow:
-    inset 0 0 20px rgba(255,255,255,.18),
-    0 0 25px rgba(255,255,255,.08);
+  background:linear-gradient(180deg,rgba(255,255,255,.15),rgba(0,0,0,.85));
+  box-shadow:inset 0 0 20px rgba(255,255,255,.18),0 0 25px rgba(255,255,255,.08);
   backdrop-filter:blur(12px);
   transition:.35s ease;
 }
+.btn:hover{background:#fff;color:#000}
 
-.btn span.icon{
-  font-size:18px;
-  opacity:.9;
+/* ===== MUSIC BUTTON ===== */
+.music-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  padding:14px 32px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
+  background:linear-gradient(180deg,#ffffff22,#000000aa);
+  color:#fff;
+  letter-spacing:3px;
+  font-family:"PROBERT";
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  transition:.3s;
 }
-
-.btn:hover{
-  background:#fff;
-  color:#000;
-  box-shadow:
-    0 0 25px rgba(255,255,255,.6);
-}
+.music-btn:hover{background:#fff;color:#000}
 
 /* ===== FOOTER ===== */
 footer{
@@ -142,6 +147,12 @@ footer{
 
 <body>
 
+<!-- ===== YOUTUBE MUSIC ===== -->
+<iframe id="yt"
+src="https://www.youtube.com/embed/mgK0-P8sTCw?start=11&enablejsapi=1&autoplay=1&mute=1&controls=0&loop=1&playlist=mgK0-P8sTCw"
+allow="autoplay"
+style="display:none"></iframe>
+
 <div id="sunlight"></div>
 <div id="vignette"></div>
 
@@ -150,21 +161,34 @@ footer{
   <div class="tagline">NEVERLOSE</div>
 
   <div class="buttons">
-    <a class="btn" href="https://gang.fivemlist.info/arbarstyle" target="_blank">
-      <span class="icon">👥</span>
-      <span>ARBAR</span>
-    </a>
-
-    <a class="btn" href="https://www.facebook.com/uno.kodomo" target="_blank">
-      <span class="icon">f</span>
-      <span>CONTACT</span>
-    </a>
+    <a class="btn" href="https://gang.fivemlist.info/arbarstyle" target="_blank">👥 ARBAR</a>
+    <a class="btn" href="https://www.facebook.com/uno.kodomo" target="_blank">f CONTACT</a>
   </div>
 </main>
+
+<div class="music-btn" id="musicBtn">▶ MUSIC</div>
 
 <footer>
 © 2025 ARBAR — Designed by UNO ARBAR | LIASTNAME BY KINGS
 </footer>
+
+<script>
+const yt=document.getElementById("yt");
+const btn=document.getElementById("musicBtn");
+let playing=false;
+
+btn.onclick=()=>{
+  if(!playing){
+    yt.src = yt.src.replace("mute=1","mute=0");
+    btn.textContent="⏸ MUSIC";
+    playing=true;
+  }else{
+    yt.src = yt.src.replace("mute=0","mute=1");
+    btn.textContent="▶ MUSIC";
+    playing=false;
+  }
+};
+</script>
 
 </body>
 </html>
