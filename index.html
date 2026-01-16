@@ -19,7 +19,49 @@ body{
   text-align:center;
 }
 
-/* ===== WATER GLASS BG ===== */
+/* ===== SCI-FI CORE BG ===== */
+#bg{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(135deg,#000 0%,#050505 45%,#000 75%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.04) 0,
+      rgba(255,255,255,.04) 1px,
+      transparent 1px,
+      transparent 120px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.04) 0,
+      rgba(255,255,255,.04) 1px,
+      transparent 1px,
+      transparent 120px
+    );
+  z-index:-4;
+}
+
+/* ===== TECH LINES ===== */
+#lines{
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 70px,
+      rgba(255,255,255,.035) 70px 71px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 100px,
+      rgba(255,255,255,.03) 100px 101px
+    );
+  opacity:.35;
+  z-index:-3;
+}
+
+/* ===== WATER GLASS ===== */
 #water{
   position:fixed;
   inset:-20%;
@@ -29,7 +71,7 @@ body{
     linear-gradient(115deg,rgba(255,255,255,.08),transparent 60%);
   filter:blur(20px);
   animation:waterMove 12s linear infinite;
-  z-index:-3;
+  z-index:-2;
 }
 
 @keyframes waterMove{
@@ -38,12 +80,21 @@ body{
   100%{transform:translate(0,0)}
 }
 
-/* ===== RAIN DROPS ===== */
+/* ===== NOISE ===== */
+#noise{
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+  z-index:-1;
+}
+
+/* ===== RAIN ===== */
 canvas{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:-2;
+  z-index:-1;
 }
 
 /* ===== MAIN ===== */
@@ -76,7 +127,7 @@ main{
   letter-spacing:6px;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTONS (EQUAL SIZE) ===== */
 .buttons{
   margin-top:60px;
   display:flex;
@@ -85,7 +136,12 @@ main{
 }
 
 .btn{
-  padding:18px 52px;
+  width:260px;            /* <<< ขนาดเท่ากัน */
+  height:62px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   border-radius:10px;
   border:1px solid rgba(255,255,255,.5);
   background:rgba(0,0,0,.45);
@@ -96,6 +152,7 @@ main{
   backdrop-filter:blur(10px);
   transition:.3s;
 }
+
 .btn:hover{
   background:#fff;
   color:#000;
@@ -134,7 +191,10 @@ src="https://www.youtube.com/embed/mgK0-P8sTCw?start=11&autoplay=1&mute=1&contro
 allow="autoplay"
 style="display:none"></iframe>
 
+<div id="bg"></div>
+<div id="lines"></div>
 <div id="water"></div>
+<div id="noise"></div>
 <canvas id="rain"></canvas>
 
 <main>
@@ -154,7 +214,7 @@ style="display:none"></iframe>
 </footer>
 
 <script>
-/* ===== WATER DROPS ===== */
+/* ===== RAIN ===== */
 const c=document.getElementById("rain"),x=c.getContext("2d");
 function resize(){c.width=innerWidth;c.height=innerHeight}
 resize();onresize=resize;
@@ -175,7 +235,7 @@ setInterval(()=>{
   });
 },30);
 
-/* ===== MUSIC CONTROL ===== */
+/* ===== MUSIC ===== */
 const yt=document.getElementById("yt");
 const btn=document.getElementById("musicBtn");
 let unmuted=false;
@@ -188,11 +248,9 @@ document.body.addEventListener("click",()=>{
 },{once:true});
 
 btn.onclick=()=>{
-  if(yt.src.includes("mute=0")){
-    yt.src=yt.src.replace("mute=0","mute=1");
-  }else{
-    yt.src=yt.src.replace("mute=1","mute=0");
-  }
+  yt.src=yt.src.includes("mute=0")
+    ? yt.src.replace("mute=0","mute=1")
+    : yt.src.replace("mute=1","mute=0");
 };
 </script>
 
